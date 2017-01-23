@@ -1,6 +1,6 @@
 {
   "name": "winnipegtransitapi",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Node Wrapper for Winnipeg Transit REST API Services.",
   "main": "index.js",
   "scripts": {
