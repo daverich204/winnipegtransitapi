@@ -4,9 +4,10 @@ This Wrapper is in the development stage and this page will be updated soon with
 
 ### Installation
 
-`npm install winnipegtransitapi`
-`bower install winnipegtransitapi`
-
+```
+npm install winnipegtransitapi
+bower install winnipegtransitapi
+```
 
 ### Documentation
 
