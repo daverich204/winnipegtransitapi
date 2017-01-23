@@ -1,0 +1,25 @@
+{
+  "name": "winnipegtransitapi",
+  "version": "0.1.0",
+  "description": "Node Wrapper for Winnipeg Transit REST API Services.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daverich204/winnipegtransitapi.git"
+  },
+  "keywords": [
+    "Winnipeg",
+    "Transit",
+    "WinnipegTransit",
+    "wpgtransit"
+  ],
+  "author": "Dave Richardson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daverich204/winnipegtransitapi/issues"
+  },
+  "homepage": "https://github.com/daverich204/winnipegtransitapi#readme"
+}
