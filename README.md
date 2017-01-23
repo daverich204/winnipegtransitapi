@@ -1,12 +1,18 @@
-## Welcome to GitHub Pages
+## Welcome to winnipegtransitapi
 
-You can use the [editor on GitHub](https://github.com/daverich204/winnipegtransitapi/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+This Wrapper is in the development stage and this page will be updated soon with some documentation for the package. 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Installation
 
-### Markdown
+`npm install winnipegtransitapi`
+`bower install winnipegtransitapi`
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+
+### Documentation
+
+View the API Explorer Here with working code examples:
+
+
 
 ```markdown
 Syntax highlighted code block
