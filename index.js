@@ -10,6 +10,15 @@ class WinnipegTransitAPI {
         this.#host = host;
     }
 
+    async getStatus(params = {}) {
+        params['api-key'] = this.#apiKey;
+
+        const res = await fetch(`${this.#host}/statuses/schedule.json?${formatParameters(params)}`);
+        return res.json();
+    }
+
+
+    // STOPS
     async findStops(search_term, params = {}) {
         params['api-key'] = this.#apiKey;
 
@@ -30,7 +39,29 @@ class WinnipegTransitAPI {
         const res = await fetch(`${this.#host}/stops/${stop_id}/schedule.json?${formatParameters(params)}`);
         return res.json();
     }
-};
+
+    // ROUTES
+    async findRoutes(search_term, params = {}) {
+        params['api-key'] = this.#apiKey;
+
+        const res = await fetch(`${this.#host}/routes:${search_term}.json?${formatParameters(params)}`);
+        return res.json();
+    }
+
+    async getRoute(route_id, params = {}) {
+        params['api-key'] = this.#apiKey;
+
+        const res = await fetch(`${this.#host}/routes/${route_id}.json?${formatParameters(params)}`);
+        return res.json();
+    }
+
+    async getRoutesAtStop(stop_id) {
+        params['api-key'] = this.#apiKey;
+        params['stop'] = stop_id;
+
+        const res = await fetch(`${this.#host}/routes.json?${formatParameters(params)}`);
+    }
+}
 
 const formatParameters = (params) => {
     let sortedKeys = [], formattedParams = '';

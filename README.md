@@ -19,11 +19,11 @@ const client = new WinnipegTransitAPI('YOUR_API_KEY_HERE');
 
 // in an async function
 const res = await client.getStop(10064);
-console.log("stopData => ", stopData);
+console.log("res => ", res);
 
 // or then-able, 
-client.getStop(10064).then((data) => {
-  // do something
+client.getStop(10064).then((res) => {
+  // do something with res
 });
 ```
 
@@ -35,11 +35,23 @@ This returns all stops matching a search term
 
 ### getStop(stop_id)
 
-Returns stop data when given an ID (5 digit stop number)
+Returns information about a stop when given an ID (5 digit stop number)
 
 ### getStopSchedule(stop_id) 
 
 Returns a stop schedule.
+
+### findRoutes('search_term')
+
+Returns all routes matching a search term
+
+### getRoute(route_id)
+
+Returns information about a route given a route id
+
+### getRoutesAtStop(stop_id) 
+
+Returns all routes that pass through a stop
 
 ### Other Functions 
 
