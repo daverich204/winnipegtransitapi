@@ -1,6 +1,6 @@
-# winnipegtransitapi - a NodeJS wrapper for Winnipeg Transit's Open Data Web Service
+# winnipegtransitapi - javascript wrapper for Winnipeg Transit's Open Data Web Service
 
-This Wrapper is in the development stage and this page will be updated soon with some documentation for the package. 
+This is in development. Feel free to reach out if there's any functionality you would like added to this. 
 
 ## Installation
 
@@ -13,14 +13,26 @@ yard add winnipegtransitapi
 
 View the API Explorer and some demos [here](https://daverich204.github.io/winnipegtransitapi/).
 
+### Setup
+
 ```markdown
 import WinnipegTransitAPI from 'winnipegtransitapi';
 const client = new WinnipegTransitAPI('YOUR_API_KEY_HERE');
+```
+### Async Functions
 
+You can await client functions
+
+```
 // in an async function
 const res = await client.getStop(10064);
 console.log("res => ", res);
+```
+### Thenable
 
+You can also use .then() to handle your responses.
+
+```markdown
 // or then-able, 
 client.getStop(10064).then((res) => {
   // do something with res
@@ -29,27 +41,31 @@ client.getStop(10064).then((res) => {
 
 ## Client Functions 
 
-### findStops('search_term')
+### - client.findStops('search_term', params)
 
 This returns all stops matching a search term
 
-### getStop(stop_id)
+### - client.getStop(stop_id, params)
 
 Returns information about a stop when given an ID (5 digit stop number)
 
-### getStopSchedule(stop_id) 
+### - client.getStopsNearby(params)
+
+Takes a set of parameters (eg: distance, lat, lon, x, y ) and returns stops nearby 
+
+### - client.getStopSchedule(stop_id, params) 
 
 Returns a stop schedule.
 
-### findRoutes('search_term')
+### - client.findRoutes('search_term', params)
 
 Returns all routes matching a search term
 
-### getRoute(route_id)
+### - client.getRoute(route_id, params)
 
 Returns information about a route given a route id
 
-### getRoutesAtStop(stop_id) 
+### - client.getRoutesAtStop(stop_id, params) 
 
 Returns all routes that pass through a stop
 

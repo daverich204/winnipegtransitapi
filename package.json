@@ -1,7 +1,7 @@
 {
   "name": "winnipegtransitapi",
   "type": "module",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Node Wrapper for Winnipeg Transit REST API Services.",
   "main": "index.js",
   "scripts": {
@@ -14,8 +14,10 @@
   "keywords": [
     "Winnipeg",
     "Transit",
-    "WinnipegTransit",
-    "wpgtransit"
+    "Winnipeg Transit",
+    "wpgtransit",
+    "OpenData",
+    "Winnipeg Transit API"
   ],
   "author": "Dave Richardson",
   "license": "ISC",

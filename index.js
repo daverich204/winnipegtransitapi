@@ -33,6 +33,13 @@ class WinnipegTransitAPI {
         return res.json();
     }
 
+    async getStopsNearby(params = {}) {
+        params['api-key'] = this.#apiKey;
+
+        const res = await fetch(`${this.#host}/stops.json?${formatParameters(params)}`);
+        return res.json();
+    }
+
     async getStopSchedule(stop_id, params = {}) {
         params['api-key'] = this.#apiKey;
 
