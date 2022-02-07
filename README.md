@@ -1,8 +1,8 @@
 # winnipegtransitapi
 
-An unofficial javascript wrapper for Winnipeg Transit's Open Data Web Service
+An unofficial javascript wrapper for Winnipeg Transit's Open Data Web Service.
 
-Some common functions for accessing the public API provided by Winnipeg Transit.
+Contains some common functions for pulling data from the public API provided by Winnipeg Transit.
 
 ## Documentation
 
