@@ -63,7 +63,7 @@ client.getStop(10064).then((stop_details) => {
     console.log("stop_details => ", stop_details);
 });
 ```
-## API Calls
+## General Services
 
 ### Check system status: 
 
@@ -72,6 +72,8 @@ You can get an overall status message for the schedule service with
 ```js
 const status = await client.getStatus();
 ```
+
+## Stop Services
 
 ### To search for a stop:
 
