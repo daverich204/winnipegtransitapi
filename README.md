@@ -1,74 +1,173 @@
-# winnipegtransitapi - javascript wrapper for Winnipeg Transit's Open Data Web Service
+# winnipegtransitapi
 
-This is in development. Feel free to reach out if there's any functionality you would like added to this. 
+An unofficial javascript wrapper for Winnipeg Transit's Open Data Web Service
 
-## Installation
-
-```
-npm install winnipegtransitapi
-yard add winnipegtransitapi
-```
+Some common functions for accessing the public API provided by Winnipeg Transit.
 
 ## Documentation
 
-View the API Explorer and some demos [here](https://daverich204.github.io/winnipegtransitapi/).
+See the official [`Winnipeg Transit API docs`](https://api.winnipegtransit.com/) for more details.
 
-### Setup
+## Installation
 
-```markdown
-import WinnipegTransitAPI from 'winnipegtransitapi';
+Install the package with:
+
+```sh
+npm install --save winnipegtransitapi
+# or
+yarn add winnipegtransitapi
+```
+
+## Configuration
+
+The package needs to be configured with your Winnipeg Transit API key, which is
+available on your home screen when you log into your [Winnipeg Transit API Account](https://api.winnipegtransit.com/). 
+
+Create a new instance of the client with your API key. 
+
+```js
+import WinnipegTransitAPI from 'winnipegtransitapi'
 const client = new WinnipegTransitAPI('YOUR_API_KEY_HERE');
 ```
-### Async Functions
 
-You can await client functions
+Optionally, you can pass a different API version as the second parameter in this constructor
 
+```js
+const client = new WinnipegTransitAPI('YOUR_API_KEY_HERE', 'https://api.winnipegtransit.com/v2')
 ```
-// in an async function
-const res = await client.getStop(10064);
-console.log("res => ", res);
+
+The default URL is [v3]('https://api.winnipegtransit.com/v3') of the API
+
+### Usage
+
+You can use ES modules and `async`/`await`:
+
+```js
+import WinnipegTransitAPI from 'winnipegtransitapi';
+const client = new WinnipegTransitAPI('YOUR_API_KEY_HERE');
+
+const stop_details = await client.getStop(10064);
+// print out stop details
+console.log("stop_details => ", stop_details);
 ```
-### Thenable
 
-You can also use .then() to handle your responses.
 
-```markdown
-// or then-able, 
-client.getStop(10064).then((res) => {
-  // do something with res
+Or, you can use this with `promises` like this:
+
+```js
+import WinnipegTransitAPI from 'winnipegtransitapi';
+const client = new WinnipegTransitAPI('YOUR_API_KEY_HERE');
+
+client.getStop(10064).then((stop_details) => {
+    // do something with json response object.
+    console.log("stop_details => ", stop_details);
 });
 ```
+## API Calls
 
-## Client Functions 
+### Check system status: 
 
-### - client.findStops('search_term', params)
+You can get an overall status message for the schedule service with
 
-This returns all stops matching a search term
+```js
+const status = await client.getStatus();
+```
 
-### - client.getStop(stop_id, params)
+### To search for a stop:
 
-Returns information about a stop when given an ID (5 digit stop number)
+You can search for a stop using `.findStops()`, providing a search term like this:
 
-### - client.getStopsNearby(params)
+```js
+const search_results = await client.findStops('search_term');
+// or provide additional params  
+const search_results = await client.findStops('search_term', other_params);
+```
 
-Takes a set of parameters (eg: distance, lat, lon, x, y ) and returns stops nearby 
+This will perform a wildcard stop search given the search term, and any additional parameters can
+be found on the official [api docs](https://api.winnipegtransit.com/home/api/v3/services/stops)
 
-### - client.getStopSchedule(stop_id, params) 
+You will get back an array of stop objects matching your query.
 
-Returns a stop schedule.
+### To get stop details: 
 
-### - client.findRoutes('search_term', params)
+You can use `.getStop()` to get back information about a single stop like this:
 
-Returns all routes matching a search term
+```js
+// pass in a 5 digit stop id.
+const stop_details = await client.getStop(stop_id);
+// or provide additional params  
+const stop_details = await client.getStop(stop_id, other_params);
+```
 
-### - client.getRoute(route_id, params)
+This is what the [api docs](https://api.winnipegtransit.com/home/api/v3/services/stops) refer to as an
+identity query. Some example additional parameters are `{ usage: 'long' }`
 
-Returns information about a route given a route id
+### Get stops near a location and more:
 
-### - client.getRoutesAtStop(stop_id, params) 
+You can use `.getStopsMatching()` to return an array of stops using a `filter` query. 
 
-Returns all routes that pass through a stop
+It can be used to return stops near a location, but it can also be used to return stops matching any number of criteria. 
 
-### Other Functions 
+```js
+// get stops near a location 
+const nearby_stops = await client.getStopsMatching({ lat: 49.86954995, lon: -97.13714044, distance: 250 });
 
-I'll be adding other functionality here as needed
+// get stops for a particular route 
+const route_stops = await client.getStopsMatching({ route: 16 });
+
+// get stops on a street
+const stops_on_street = await client.getStopsMatching({ street: 2717 });
+```
+
+### To get the schedule for a particular stop:
+
+You can use `getStopSchedule()` to get the schedule for a stop. 
+
+```js
+// return a immediate schedule 
+const stop_schedule = await client.getStopSchedule(stop_id);
+
+// pass some additional params 
+const other_params = { start: '06:00:00', end : '08:00:00'}
+const stop_schedule = await client.getStopSchedule(stop_id, other_params);
+
+// get the stop schedule for a particular route
+const route_schedule = await client.getStopSchedule(stop_id, { route: 16 });
+```
+
+## Route Services
+
+### To search for a route:
+
+Use `.findRoutes()`, providing a search term like this:
+
+```js
+const search_results = await client.findRoutes('search_term');
+// or provide additional params  
+const search_results = await client.findRoutes('search_term', other_params);
+```
+
+
+### To get route details:
+
+You can use `.getRoute()` to get back information about a single route like this:
+
+```js
+// pass in a route ID.
+const route_details = await client.getRoute(11);
+// or provide additional params  
+const route_details = await client.getRoute(route_id, other_params);
+```
+
+### To get routes at a particular stop:
+
+You can use `getRoutesAtStop(stop_id)` to return a list of routes that visit that stop:
+
+```js
+// pass in a 5 digit stop id.
+const routes_through_stop = await client.getRoutesAtStop(stop_id);
+```
+
+## Other Functions 
+
+I'll be adding other functionality here as needed.
