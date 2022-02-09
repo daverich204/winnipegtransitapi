@@ -65,12 +65,31 @@ client.getStop(10064).then((stop_details) => {
 ```
 ## General Services
 
-### Check system status: 
+### To check schedule status: 
 
 You can get an overall status message for the schedule service with
 
 ```js
 const status = await client.getStatus();
+```
+
+### To get Service Advisories:
+
+You can load all current service advisories like this:
+
+```js
+const service_advisories = await client.getServiceAdvisories();
+// or
+const some_params = { priority: 2, limit: 3 }
+const service_advisories = await client.getServiceAdvisories(some_params);
+```
+
+For a full list of params check out the official Winnipeg Transit [API docs](https://api.winnipegtransit.com/home/api/v3/services/service-advisories)
+
+#### To get details for a particular service advisory:
+
+```js 
+const service_advisory = await client.getServiceAdvisory(advisory_id);
 ```
 
 ## Stop Services
@@ -99,6 +118,17 @@ You can use `.getStop()` to get back information about a single stop like this:
 const stop_details = await client.getStop(stop_id);
 // or provide additional params  
 const stop_details = await client.getStop(stop_id, other_params);
+```
+
+### To get stop features:
+
+You can use `.getStopFeatures()` to get back features for a particular stop.
+
+```js
+// pass in a 5 digit stop id.
+const stop_features = await client.getStopFeatures(stop_id);
+// or provide additional params  
+const stop_features = await client.getStopFeatures(stop_id, other_params);
 ```
 
 This is what the [api docs](https://api.winnipegtransit.com/home/api/v3/services/stops) refer to as an
@@ -169,6 +199,39 @@ You can use `getRoutesAtStop(stop_id)` to return a list of routes that visit tha
 // pass in a 5 digit stop id.
 const routes_through_stop = await client.getRoutesAtStop(stop_id);
 ```
+
+## Street Services 
+
+### To search for a street:
+
+You can use `.findStreet()` to find streets given a search term:
+
+```js 
+const streets = await client.findStreet('main street');
+// or, with additional params
+const streets = await client.findStreet('main street', { leg: e });
+```
+
+### To get details for a particular street:
+
+Use the `.getStreet` function for this:
+
+```js
+const street_data = await client.getStreet(street_id);
+// or with additional params 
+const street_data = await client.getStreet(street_id, additional_params);
+```
+
+### To get streets that match given criteria: 
+
+Use the `getMatchingStreets()` function like this:
+
+```js
+const street_params = { name: 'Main', leg: 'N' };
+const streets = await client.getMatchingStreets(street_params);
+```
+
+See the official API docs for parameters that can be passed in here.
 
 ## Other Functions 
 
