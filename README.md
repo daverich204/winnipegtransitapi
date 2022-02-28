@@ -92,6 +92,28 @@ For a full list of params check out the official Winnipeg Transit [API docs](htt
 const service_advisory = await client.getServiceAdvisory(advisory_id);
 ```
 
+## Location Services 
+
+### To search for a location:
+
+You can search for a location using `.findLocation`, providing a search term like this:
+
+```js
+const search_results = await client.findLocation('search_term');
+// or provide additional params  
+const search_results = await client.findLocation('search_term', other_params);
+```
+
+### Get locations matching criteria:
+
+You can search for a location by other parameters than a name, use `.getLocationsMatch()`:
+
+```js
+// Fetches all locations within 1km of 49.895, -97.138
+const location_params = { lat: 49.895, lon: -97.138, distance: 1000 }
+const search_results = await client.getLocationsMatching(location_params);
+```
+
 ## Stop Services
 
 ### To search for a stop:

@@ -33,6 +33,20 @@ class WinnipegTransitAPI {
         return res.json();
     }
 
+    // Location Services
+    async findLocation(search_term, params = {}) {
+        params['api-key'] = this.#apiKey;
+
+        const res = await fetch(`${this.#host}/locations:${search_term}.json?${formatParameters(params)}`);
+        return res.json();
+    }
+
+    async getLocationsMatching(params = {}) {
+        params['api-key'] = this.#apiKey;
+
+        const res = await fetch(`${this.#host}/locations.json?${formatParameters(params)}`);
+        return res.json();
+    }
 
     // Stop Services
     async findStops(search_term, params = {}) {
