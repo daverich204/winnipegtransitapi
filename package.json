@@ -1,7 +1,7 @@
 {
   "name": "winnipegtransitapi",
   "type": "module",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Node Wrapper for Winnipeg Transit REST API Services.",
   "main": "index.js",
   "scripts": {
@@ -37,11 +37,17 @@
     "babel-jest": "^27.5.0",
     "commitizen": "^4.2.4",
     "cross-env": "^7.0.3",
+    "cz-conventional-changelog": "^3.3.0",
     "jest": "^27.5.0",
     "standard-version": "^9.3.2"
   },
   "jest": {
     "verbose": true,
     "transform": {}
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
