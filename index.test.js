@@ -31,6 +31,18 @@ describe('winnipegtransitapi - api functions', () => {
        });
     });
 
+    describe('locations', () => {
+        test('findLocation()', async () => {
+          const locations = await client.findLocation('polo');
+          expect(locations).toBeDefined();
+        });
+
+        test('getLocationsMatching()', async () => {
+          const locations = await client.getLocationsMatching({ lat: 49.895, lon: -97.138 });
+          expect(locations).toBeDefined();
+        });
+    });
+
     describe('stops', () => {
         test('findStops()', async () => {
             const stops = await client.findStops('osborne');
