@@ -31,6 +31,13 @@ describe('winnipegtransitapi - api functions', () => {
        });
     });
 
+    describe('destinations', () => {
+      test('getVariantDestinations', async () => {
+        const destinations = await client.getVariantDestinations('16-1-K');
+        expect(destinations).toBeDefined();
+      });
+    })
+
     describe('locations', () => {
         test('findLocation()', async () => {
           const locations = await client.findLocation('polo');
