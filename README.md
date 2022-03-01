@@ -92,6 +92,16 @@ For a full list of params check out the official Winnipeg Transit [API docs](htt
 const service_advisory = await client.getServiceAdvisory(advisory_id);
 ```
 
+## Destination Services 
+
+You can find destinations for a route variant using `getVariantDestinations()` and pass in a variant key (eg: 16-1-K).
+
+```js
+const search_results = await client.getVariantDestinations('16-1-K');
+// or provide additional params  
+const search_results = await client.getVariantDestinations('16-1-K', other_params);
+```
+
 ## Location Services 
 
 ### To search for a location:
